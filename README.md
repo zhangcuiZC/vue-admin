@@ -1,4 +1,4 @@
-# 云对账 admin 前端项目
+# vue admin
 
 ## 基于 vue+vue-router+vuex 的后台管理系统
 
