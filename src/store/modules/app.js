@@ -5,6 +5,8 @@ import Vue from "vue";
 export default {
   namespaced: true,
   state: {
+    collapsed:
+      window.localStorage.getItem("collapsedSider") === "true" ? true : false,
     darkTheme:
       window.localStorage.getItem("darkTheme") === "true" ? true : false,
     loginLoading: false

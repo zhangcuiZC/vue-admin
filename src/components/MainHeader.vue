@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="logoBox">
-      <Logo class="headerLogo" :class="darkTheme ? 'darkLogo' : ''" />
+      <Logo class="headerLogo" :class="{darkLogo : darkTheme, collapsedLogo: collapsed}" />
     </div>
 
     <div class="menu">
@@ -54,6 +54,11 @@
   .darkLogo {
     color: #fff;
     background: #515a6e;
+  }
+  .collapsedLogo {
+    width: 70px;
+    overflow: hidden;
+    padding-left: 15px;
   }
 }
 img {
@@ -124,6 +129,11 @@ img {
       height: 100%;
     }
   }
+  .collapsedLogo {
+    .logoBox {
+      display: none;
+    }
+  }
 }
 </style>
 
@@ -161,6 +171,9 @@ export default {
   computed: {
     darkTheme() {
       return this.$store.state.app.darkTheme;
+    },
+    collapsed() {
+      return this.$store.state.app.collapsed;
     }
   },
   props: ["root"],

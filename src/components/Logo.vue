@@ -18,6 +18,7 @@
   justify-content: flex-start;
   align-items: center;
   color: @color-black1;
+  transition: all 0.2s ease-in-out;
   .logoIcon {
     font-size: 40px;
     margin-right: 10px;
