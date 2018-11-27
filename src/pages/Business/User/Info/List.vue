@@ -5,7 +5,7 @@
       <Input v-model="search.account" placeholder="商户账号" style="width: 200px" />
       <Button type="primary" ghost>搜索</Button>
       <Button>清空</Button>
-      <Button type="primary" class="newBtn" to="/business/user/new">添加商户</Button>
+      <Button type="primary" class="newBtn" icon="md-add" to="/business/user/info/create">添加商户</Button>
     </div>
     <Table :columns="column" :data="dataSrc"></Table>
   </div>
@@ -29,7 +29,7 @@
 <script>
 import { Input, Button, Table } from "iview";
 export default {
-  name: "List",
+  name: "UserList",
   components: { Input, Button, Table },
   data() {
     return {

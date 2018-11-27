@@ -1,14 +1,14 @@
 <template>
-  <UserInfo @submit="handleSubmit" :loading="loading" />
+  <UserForm @submit="handleSubmit" :loading="loading" />
 </template>
 <script>
-import UserInfo from "../../../components/Business/UserInfo";
+import UserForm from "@/components/Business/UserForm";
 export default {
-  name: "New",
-  components: { UserInfo },
+  name: "UserCreate",
+  components: { UserForm },
   computed: {
     loading() {
-      return this.$store.state.userInfo.addLoading;
+      return this.$store.state.app.loading.addUser;
     }
   },
   methods: {

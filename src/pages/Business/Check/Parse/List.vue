@@ -4,7 +4,7 @@
       <Input v-model="search.name" placeholder="通道名称" style="width: 200px" />
       <Button type="primary" ghost>搜索</Button>
       <Button>清空</Button>
-      <Button type="primary" class="newBtn" to="/business/check/newChannel">添加通道</Button>
+      <Button type="primary" class="newBtn" icon="md-add" to="/business/check/parse/create">新增解析规则</Button>
     </div>
     <Table :columns="column" :data="dataSrc"></Table>
   </div>
@@ -28,7 +28,7 @@
 <script>
 import { Input, Button, Table } from "iview";
 export default {
-  name: "List",
+  name: "ParseList",
   components: { Input, Button, Table },
   data() {
     return {

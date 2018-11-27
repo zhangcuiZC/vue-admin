@@ -1,16 +1,28 @@
 <template>
   <div class="header">
     <div class="logoBox">
-      <Logo class="headerLogo" :class="{darkLogo : darkTheme, collapsedLogo: collapsed}" />
+      <Logo 
+        class="headerLogo" 
+        :class="{darkLogo : darkTheme, collapsedLogo: collapsed}" 
+      />
     </div>
 
     <div class="menu">
-      <Menu mode="horizontal" theme="light" :active-name="root" class="headerMenu">
-        <MenuItem v-for="item in headerMenuList" :name="item.name" :key="item.name">
-        <router-link :to="item.to">
-          <Icon :type="item.icon"></Icon>
-          {{item.title}}
-        </router-link>
+      <Menu 
+        mode="horizontal" 
+        theme="light" 
+        :active-name="root" 
+        class="headerMenu"
+      >
+        <MenuItem 
+          v-for="item in headerMenuList" 
+          :name="item.name" 
+          :key="item.name"
+        >
+          <router-link :to="item.to">
+            <Icon :type="item.icon"/>
+            {{item.title}}
+          </router-link>
         </MenuItem>
       </Menu>
     </div>
@@ -20,13 +32,13 @@
         <span>
           <Avatar class="avatar">{{userName&&userName[0].toUpperCase()}}</Avatar>
           <span class="welcome">你好，</span>{{userName}}
-          <Icon class="icon" type="md-menu"></Icon>
+          <Icon class="icon" type="md-menu"/>
         </span>
         <DropdownMenu slot="list">
           <DropdownItem>
-            <Icon type="md-create"></Icon> 修改密码</DropdownItem>
+            <Icon type="md-create"/> 修改密码</DropdownItem>
           <DropdownItem @click.native="logout">
-            <Icon type="md-exit"></Icon> 退出登录</DropdownItem>
+            <Icon type="md-exit"/> 退出登录</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>
@@ -34,7 +46,7 @@
 </template>
 
 <style scoped lang="less">
-@import "../theme/constant.less";
+@import "../../theme/constant.less";
 .header {
   width: 100%;
   height: 70px;
@@ -138,7 +150,7 @@ img {
 </style>
 
 <script>
-import { getCookie, delCookie } from "../utils/cookie.js";
+import { getCookie, delCookie } from "@/utils/cookie.js";
 import {
   Avatar,
   Menu,
@@ -148,8 +160,8 @@ import {
   DropdownMenu,
   DropdownItem
 } from "iview";
-import headerMenuList from "../config/headerMenu.js";
-import Logo from "../components/Logo";
+import headerMenuList from "@/config/headerMenu.js";
+import Logo from "@/components/Logo";
 export default {
   name: "MainHeader",
   components: {

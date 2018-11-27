@@ -2,8 +2,8 @@
   <div class="logo">
     <Icon class="logoIcon" type="md-cube"></Icon>
     <div class="logoBox">
-      <p class="logoTitle">Vue-iView管理后台</p>
-      <p class="logoText">Vue-iView Admin Platform</p>
+      <p class="logoTitle">云对账管理后台</p>
+      <p class="logoText">Echeck Management</p>
     </div>
   </div>
 </template>

@@ -3,11 +3,11 @@ import Router from "vue-router";
 import { Message } from "iview";
 import { getCookie } from "@/utils/cookie";
 import Settings from "@/components/Settings.vue";
-import MainLayout from "../layouts/MainLayout.vue";
+import MainLayout from "../layouts/Main/Index.vue";
 import NotFound from "../pages/Error/NotFound.vue";
 import Login from "../pages/Login/Login.vue";
 
-import business from "./business";
+import business from "./business/index";
 
 const MainView = { template: "<router-view></router-view>", name: "MainView" };
 
@@ -15,6 +15,7 @@ Vue.use(Router);
 
 const router = new Router({
   mode: "history",
+  // base: "/echeck-admin-boss/admin/",
   routes: [
     {
       path: "/",

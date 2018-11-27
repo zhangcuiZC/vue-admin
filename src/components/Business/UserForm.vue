@@ -1,20 +1,20 @@
 <template>
   <div class="userInfoPage">
-    <Form :label-width="120" :model="info" :rules="infoRules"  ref="userInfoForm">
+    <Form :label-width="120" :model="info" :rules="infoRules" ref="userInfoForm">
       <FormItem label="商户名称">
-        <Input type="text" v-model="info.name"></Input>
+        <Input type="text" v-model="info.name"/>
       </FormItem>
       <FormItem label="商户账号" prop="userName">
-        <Input type="text" v-model="info.userName" :disabled="info.id ? true : false"></Input>
+        <Input type="text" v-model="info.userName" :disabled="info.id ? true : false"/>
       </FormItem>
       <FormItem label="手机账号" prop="telPhone">
-        <Input type="text" v-model="info.telPhone" :disabled="info.id ? true : false"></Input>
+        <Input type="text" v-model="info.telPhone" :disabled="info.id ? true : false"/>
       </FormItem>
       <FormItem label="联系人">
-        <Input type="text" v-model="info.contactsName"></Input>
+        <Input type="text" v-model="info.contactsName"/>
       </FormItem>
       <FormItem label="联系电话">
-        <Input type="text" v-model="info.contactsPhone"></Input>
+        <Input type="text" v-model="info.contactsPhone"/>
       </FormItem>
       <FormItem label="开通状态" prop="status">
         <Select v-model="info.status" placeholder="请选择开通状态">
@@ -30,21 +30,26 @@
         </Select>
       </FormItem>
       <FormItem label="有效期至" prop="expireTime">
-        <date-picker
-            type="datetime"
-            placeholder="请选择有效期"
-            style="width: 100%;"
-            v-model="info.expireTime"
-        ></date-picker>
+        <DatePicker
+          type="datetime"
+          placeholder="请选择有效期"
+          style="width: 100%;"
+          v-model="info.expireTime"
+        />
       </FormItem>
       <FormItem label="密码" :prop="this.info.id ? '' : 'password'">
-        <Input type="password" v-model="info.password"></Input>
+        <Input type="password" v-model="info.password"/>
       </FormItem>
       <FormItem label="确认密码" prop="confirmPassword">
-        <Input type="password" v-model="info.confirmPassword"></Input>
+        <Input type="password" v-model="info.confirmPassword"/>
       </FormItem>
-      <FormItem label="">
-        <Button type="primary" style="margin-right: 30px;" @click="onSubmit" :loading="loading">确认{{info.id ? "修改" : "添加"}}</Button>
+      <FormItem label>
+        <Button
+          type="primary"
+          style="margin-right: 30px;"
+          @click="onSubmit"
+          :loading="loading"
+        >确认{{info.id ? "修改" : "添加"}}</Button>
         <Button @click="goBack">返回</Button>
       </FormItem>
     </Form>
@@ -68,7 +73,7 @@ import {
 } from "iview";
 
 export default {
-  name: "UserInfo",
+  name: "UserForm",
   components: { Form, FormItem, Button, Input, DatePicker, Select, Option },
   props: {
     userInfo: {

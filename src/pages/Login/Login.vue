@@ -7,18 +7,38 @@
           <p class="plz">请登录</p>
         </div>
         <div class="loginInner">
-          <Form ref="loginForm" :model="loginFields" :rules="loginRules" class="loginForm">
+          <Form 
+            ref="loginForm" 
+            :model="loginFields" 
+            :rules="loginRules" 
+            class="loginForm"
+          >
             <FormItem prop="username">
-              <Input type="text" v-model="loginFields.username" placeholder="账号">
+              <Input 
+                type="text" 
+                v-model="loginFields.username" 
+                placeholder="账号"
+              >
               <Icon type="ios-person-outline" slot="prepend"></Icon>
               </Input>
             </FormItem>
             <FormItem prop="password">
-              <Input type="password" v-model="loginFields.password" placeholder="密码" @on-enter="handleSubmit('loginForm')">
+              <Input 
+                type="password" 
+                v-model="loginFields.password" 
+                placeholder="密码" 
+                @on-enter="handleSubmit('loginForm')"
+              >
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
               </Input>
             </FormItem>
-            <Button :loading="loading" type="primary" @click="handleSubmit('loginForm')">登 录</Button>
+            <Button 
+              :loading="loading" 
+              type="primary" 
+              @click="handleSubmit('loginForm')"
+            >
+              登 录
+            </Button>
           </Form>
         </div>
       </div>
@@ -123,7 +143,7 @@ export default {
   },
   computed: {
     loading() {
-      return this.$store.state.app.loginLoading;
+      return this.$store.state.app.loading.login;
     }
   },
   methods: {

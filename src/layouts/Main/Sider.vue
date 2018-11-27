@@ -1,30 +1,39 @@
 <template>
-  <Sider class="sider" :class="{collapsedSider: collapsed}" v-if="siderMenuList" :value="collapsed" :collapsed-width="70" :collapsible="true" :hide-trigger="true">
+  <Sider 
+    class="sider" 
+    v-if="siderMenuList" 
+    :class="{collapsedSider: collapsed}" 
+    :value="collapsed" 
+    :collapsed-width="70" 
+    :collapsible="true" 
+    :hide-trigger="true"
+  >
     <Menu 
-      :active-name="currentRouter.child" 
-      :theme="darkTheme ? 'dark' : 'light'" 
-      width="auto" 
-      :open-names="[currentRouter.parent]" 
-      class="siderMenu"
       v-if="!collapsed"
       key="menu"
+      width="auto" 
+      class="siderMenu"
+      :active-name="currentRoutes.child" 
+      :theme="darkTheme ? 'dark' : 'light'" 
+      :open-names="[currentRoutes.parent]" 
+      :accordion="true"
     >
       <Submenu 
         v-for="parent in siderMenuList" 
+        v-if="!parent.role || parent.role.indexOf(crtRole) !== -1"
         :key="parent.name" 
         :name="parent.name" 
-        v-if="!parent.role || parent.role.indexOf(crtRole) !== -1"
       >
         <template slot="title">
           <Icon :type="parent.icon"></Icon>
           {{parent.title}}
         </template>
         <MenuItem 
-          @click.native="pushPage(child.to)" 
           v-for="child in parent.children" 
+          v-if="!child.hidden"
           :key="child.name" 
           :name="child.name" 
-          v-if="!child.hidden"
+          @click.native="pushPage(child.to)" 
         >
           {{child.title}}
         </MenuItem>
@@ -32,11 +41,11 @@
     </Menu>
     <Menu
       v-else
-      class="siderMenu"
-      width="70"
-      :theme="darkTheme ? 'dark' : 'light'" 
-      :active-name="currentRouter.parent" 
       key="collapsedMenu"
+      width="70"
+      class="siderMenu"
+      :theme="darkTheme ? 'dark' : 'light'" 
+      :active-name="currentRoutes.parent" 
     >
       <li
         v-for="parent in siderMenuList" 
@@ -47,17 +56,19 @@
         >
           <div
             class="collapsedItem"
-            :class="{darkItem: darkTheme, active: currentRouter.parent === parent.name}"
+            :class="{darkItem: darkTheme, active: currentRoutes.parent === parent.name}"
           >
             <Icon :type="parent.icon"></Icon>
           </div>
           <DropdownMenu slot="list">
+            <DropdownItem disabled>{{parent.title}}</DropdownItem>
             <DropdownItem 
-              v-for="child in parent.children"
+              v-for="(child, index) in parent.children"
+              v-if="!child.hidden"
+              class="collapsedDropdownItem"
               :key="child.name" 
               :name="child.name" 
-              v-if="!child.hidden"
-              :selected="currentRouter.child === child.name"
+              :selected="currentRoutes.child === child.name"
               @click.native="pushPage(child.to)" 
             >
               {{child.title}}
@@ -65,19 +76,22 @@
           </DropdownMenu>
         </Dropdown>
       </li>
-      
     </Menu>
 
     <div class="theme" :class="darkTheme ? 'darkTheme' : ''">
       <template v-if="!collapsed">
-        <span class="arrow" @click="toggleCollapsed(true)"><Icon type="md-arrow-back" /></span>
+        <span class="arrow" @click="toggleCollapsed(true)">
+          <Icon type="md-arrow-back" />
+        </span>
         <i-switch v-model="darkTheme">
           <span slot="open">暗</span>
           <span slot="close">明</span>
         </i-switch>
       </template>
       <template v-else>
-        <span class="arrow" @click="toggleCollapsed(false)"><Icon type="md-arrow-forward" /></span>
+        <span class="arrow" @click="toggleCollapsed(false)">
+          <Icon type="md-arrow-forward" />
+        </span>
       </template>
     </div>
   </Sider>
@@ -89,15 +103,16 @@
   overflow-x: hidden;
   position: relative;
   .siderMenu {
-    font-size: 12px;
+    font-size: 13px;
     height: 100%;
     padding-bottom: 40px;
     &:after {
       display: none;
     }
     /deep/ .ivu-menu-item {
-      font-size: 12px;
+      font-size: 13px;
       white-space: nowrap;
+      padding-left: 49px !important;
     }
     /deep/ .ivu-menu-submenu-title {
       white-space: nowrap;
@@ -130,6 +145,9 @@
         background: #2d8cf0;
       }
     }
+    &:hover {
+      color: #2d8cf0;
+    }
     &.darkItem {
       color: #ccc;
       &.active {
@@ -141,7 +159,6 @@
       }
     }
   }
-
   /deep/ .ivu-dropdown {
     display: block;
   }
@@ -153,6 +170,10 @@
     .arrow {
       text-align: center;
     }
+  }
+  .collapsedDropdownItem {
+    height: 40px;
+    line-height: 26px;
   }
 }
 .theme {
@@ -200,8 +221,8 @@ import {
   DropdownMenu,
   DropdownItem
 } from "iview";
-import siderMenu from "../config/siderMenu.js";
-import { getCookie } from "../utils/cookie.js";
+import siderMenu from "@/config/siderMenu.js";
+import { getCookie } from "@/utils/cookie.js";
 import Vue from "vue";
 
 Vue.component("i-switch", Switch);
@@ -218,10 +239,10 @@ export default {
     DropdownMenu,
     DropdownItem
   },
-  props: ["currentRouter"],
+  props: ["currentRoutes"],
   computed: {
     siderMenuList() {
-      return siderMenu[this.currentRouter.root];
+      return siderMenu[this.currentRoutes.root];
     },
     crtRole() {
       return getCookie("role");

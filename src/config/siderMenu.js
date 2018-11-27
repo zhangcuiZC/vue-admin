@@ -6,23 +6,21 @@ export default {
       icon: "md-people",
       children: [
         {
-          name: "list",
-          title: "用户信息",
-          to: "/business/user/list"
-        },
-        {
-          name: "new",
-          title: "添加商户",
-          to: "/business/user/new",
-          hidden: true,
-          parent: "list"
-        },
-        {
           name: "info",
-          title: "用户详情",
+          title: "用户信息",
           to: "/business/user/info",
-          hidden: true,
-          parent: "list"
+          children: [
+            {
+              name: "create",
+              title: "添加商户",
+              to: "/business/user/info/create"
+            },
+            {
+              name: "detail",
+              title: "用户详情",
+              to: "/business/user/info/detail"
+            }
+          ]
         },
         {
           name: "relation",
@@ -44,19 +42,26 @@ export default {
         {
           name: "channel",
           title: "通道管理",
-          to: "/business/check/channel"
-        },
-        {
-          name: "newChannel",
-          title: "用户详情",
-          to: "/business/check/newChannel",
-          hidden: true,
-          parent: "channel"
+          to: "/business/check/channel",
+          children: [
+            {
+              name: "create",
+              title: "添加通道",
+              to: "/business/check/channel/create"
+            }
+          ]
         },
         {
           name: "parse",
           title: "解析器管理",
-          to: "/business/check/parse"
+          to: "/business/check/parse",
+          children: [
+            {
+              name: "create",
+              title: "新增解析规则",
+              to: "/business/check/parse/create"
+            }
+          ]
         },
         {
           name: "mode",

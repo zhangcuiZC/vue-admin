@@ -1,11 +1,11 @@
 <template>
-  <ChannelInfo @submit="handleSubmit" />
+  <ParseForm @submit="handleSubmit" />
 </template>
 <script>
-import ChannelInfo from "../../../components/Business/ChannelInfo";
+import ParseForm from "@/components/Business/ParseForm";
 export default {
-  name: "NewChannel",
-  components: { ChannelInfo },
+  name: "ParseCreate",
+  components: { ParseForm },
   methods: {
     handleSubmit(info) {
       return console.log(info);
